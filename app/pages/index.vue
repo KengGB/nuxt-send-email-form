@@ -23,6 +23,19 @@ const state = reactive<Partial<Schema>>({
 const toast = useToast()
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
+  try {
+    const req = await $fetch('/api/sendmail', {
+      method: 'POST',
+      body: {
+        to: event.data.email,
+        subject: 'Request Form',
+        html: 'Thanks'
+      }
+    })
+  } catch (err: any) {
+    alert(err.message || 'Failed to send email')
+  }
+
   toast.add({
     title: 'Form submitted',
     description:

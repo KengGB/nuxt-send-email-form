@@ -6,10 +6,16 @@ function getMailer() {
   if (!transporter) {
     const config = useRuntimeConfig()
 
+    console.log('mailer is')
+    console.log(config.smtpHost)
+    console.log(config.smtpPort)
+    console.log(config.smtpUser)
+    console.log(config.smtpPass)
+
     transporter = nodemailer.createTransport({
       host: config.smtpHost,
       port: Number(config.smtpPort),
-      secure: true,
+      secure: false,
       auth: {
         user: config.smtpUser,
         pass: config.smtpPass
